@@ -8,10 +8,16 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "@types/styled-components": "^5.1.10",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "axios": "^0.21.1",
+    "colorsys": "^1.0.22",
+    "dotenv": "^8.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "2.1.1",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.0",
     "typescript": "^3.9.3"
   },
@@ -28,6 +34,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@vercel/node": "^1.11.1"
+    "@vercel/node": "^1.11.1",
+    "eslint": "^7.29.0",
+    "eslint-plugin-react": "^7.24.0"
   }
 }
