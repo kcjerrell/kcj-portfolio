@@ -27,6 +27,32 @@ const AppContentContainer = styled.div`
   flex-grow: 1;
 `;
 
+const StickyTop = styled.div`
+  background-color: #222222;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: #cccccc;
+  padding: 0em;
+  flex-shrink: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  text-align : center;
+
+  header {
+  }
+
+  p {
+    font-size: 0.7em;
+    color: #cccccc;
+    padding: 0 20%;
+  }
+`;
+
 const App = () => {
   const { scheme, schemeList, isFetching, mode } = useSelector(state => {
     return {
@@ -62,17 +88,20 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>ColLate</h1>
-        <p>{`(Get it, cause it's late? I had trouble getting this done because I couldn't pick a project I thought was
+      <StickyTop>
+
+        <header>
+          <h1>ColLate</h1>
+          <p>{`(Get it, cause it's late? I had trouble getting this done because I couldn't pick a project I thought was
              good enough. So I tried working on this, spiralled in a bunch of directions, and didn't really get
              anywhere. But I'm submitting it anyway to show that I can at least deploy an app. [Which, for the record,
-             I ended making an api on heroku with a redis store - using authentication set up with environment
-             variables. I'll keep working on this project during the week]) (Btw, list colors, click colors to save
-             them. I'm gonna build up some actual features.)`}</p>
-      </header>
+              I ended making an api on heroku with a redis store - using authentication set up with environment
+              variables. I'll keep working on this project during the week]) (Btw, list colors, click colors to save
+                them. I'm gonna build up some actual features.)`}</p>
+        </header>
 
-      <SavedColors />
+        <SavedColors />
+      </StickyTop>
 
       <AppContentContainer >
         <Route path="/" exact>

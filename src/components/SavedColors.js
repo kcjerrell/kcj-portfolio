@@ -7,19 +7,16 @@ const Container = styled.div`
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-start;
-box-sizing:border-box;
-
+	box-sizing:border-box;
   background-color: #222222;
-
-
-
-  padding: 0em;
-
+  padding: 0 .25em;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-
   z-index: 100;
+	border-top: 1px #aaaaaa solid;
+	border-bottom: 1px #aaaaaa solid;
+	box-shadow: 0px 0px 1px 1px black;
 
 	&>div {
 		width: 1em;
