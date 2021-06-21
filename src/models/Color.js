@@ -27,7 +27,7 @@ const SHADE_METHOD = 4;
 
 const AUTO_FETCH = false;
 
-import { darken, hslToRgb, rgbToHsl, hslToHex, hexToRgb, rgbToHex } from 'colorsys';
+import { darken, rgbToHsl, hslToHex, hexToRgb, rgbToHex } from 'colorsys';
 import { fetchColor } from '../api/namelessSierra';
 
 export default class Color {
@@ -38,7 +38,7 @@ export default class Color {
     const match = this.hex.match(/#(?<r>[0-9A-F]{2})(?<g>[0-9A-F]{2})(?<b>[0-9A-F]{2})/);
 
     if (!match || !match.groups)
-      debugger;
+      throw new Error("invalid hex");
 
     const { r, g, b } = match.groups;
 
@@ -155,6 +155,7 @@ export const interpolateColors = (hexA, hexB, r = .75) => {
  * @param {boolean} alpha - not implemented
  * @returns {string} a formatted hex color string
  */
+// eslint-disable-next-line no-unused-vars
 export const formatHex = (hex, alpha = false, includeHash = true) => {
   //const col = color[0] === '#' ? color.slice(1) : color;
 
@@ -180,7 +181,7 @@ export const formatHex = (hex, alpha = false, includeHash = true) => {
 
   const digits = hex.match(/^#?([0-9a-fA-F]+)$/)?.[1];
 
-  if (!digits) { debugger; throw new Error("Invalid color hex string!"); }
+  if (!digits) { throw new Error("Invalid color hex string!"); }
 
   switch (digits.length) {
     case 6:
@@ -189,11 +190,12 @@ export const formatHex = (hex, alpha = false, includeHash = true) => {
     case 5:
       return [prefix, '0', digits].join('').toUpperCase();
 
-    case 3:
+    case 3: {
       const r = digits[0];
       const g = digits[1];
       const b = digits[2];
       return [prefix, r, r, g, g, b, b].join('').toUpperCase();
+    }
 
     case 2:
       return [prefix, digits, digits, digits].join('').toUpperCase();
@@ -202,7 +204,6 @@ export const formatHex = (hex, alpha = false, includeHash = true) => {
       return [prefix, digits, digits, digits, digits, digits, digits].join('').toUpperCase();
 
     default:
-      debugger;
       throw new Error("Invalid color hex string!");
   }
 }

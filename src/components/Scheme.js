@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SchemeColorItem from './SchemeColorItem';
+import PropTypes from 'prop-types';
+import SchemeModel from '../models/Scheme'
 
 const BgScheme = styled.div`
 	position: absolute;
@@ -115,7 +118,7 @@ const Scheme = props => {
 	const childClass = isBackground ? "bg-scheme-color" : "item-scheme-color";
 
 	const childHover = i => {
-		const handleMouseEnter = e => {
+		const handleMouseEnter = () => {
 			const onRight = i <= colors.length / 2;
 			if (labelOptions.isOnRight !== onRight || labelOptions.color !== colors[i])
 				setLabelOptions({ isOnRight: onRight, color: colors[i] });
@@ -159,3 +162,8 @@ const Scheme = props => {
 }
 
 export default Scheme;
+
+Scheme.proptypes = {
+	scheme: PropTypes.instanceOf(SchemeModel).isRequired,
+	mode: PropTypes.string.isRequired
+}

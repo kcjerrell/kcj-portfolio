@@ -1,12 +1,10 @@
 import './App.css';
 import Scheme from './components/Scheme';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import colrActions from './reducto/colrActions';
 import styled from 'styled-components';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
-import Scratch from './components/Scratch';
 import SavedColors from './components/SavedColors';
 
 const LoadingIndicator = styled.div`
@@ -29,8 +27,17 @@ const AppContentContainer = styled.div`
   flex-grow: 1;
 `;
 
-const App = props => {
-  const { scheme, dispatch } = props;
+const App = () => {
+  const { scheme, schemeList, isFetching, mode } = useSelector(state => {
+    return {
+      scheme: state.colr.scheme,
+      schemeList: state.colr.schemeList,
+      isFetching: state.colr.isFetching,
+      mode: state.colr.schemeViewMode
+    }
+  });
+  const dispatch = useDispatch();
+
   const [mod, setMod] = useState({ a: 0, b: 0 });
 
   // const testthing = (d) => console.log(d);
@@ -69,35 +76,23 @@ const App = props => {
 
       <AppContentContainer >
         <Route path="/" exact>
-          <button onClick={e => dispatch(colrActions.fetchScheme())} >Get a random scheme</button>
-          <button onClick={e => dispatch(colrActions.listSchemes())} >List some schemes</button>
+          <button onClick={() => dispatch(colrActions.fetchScheme())} >Get a random scheme</button>
+          <button onClick={() => dispatch(colrActions.listSchemes())} >List some schemes</button>
 
-          {props.mode === "single" && props.scheme && <Scheme scheme={scheme} mode="background" />}
+          {mode === "single" && scheme && <Scheme scheme={scheme} mode="background" />}
 
-          {props.mode === "list" && props.schemeList &&
+          {mode === "list" && schemeList &&
             <SchemeListContainer>
-              {props.schemeList.map((scheme, i) => <Scheme scheme={scheme} mode="item" key={i} a={mod.a} b={mod.b} />)}
+              {schemeList.map((scheme, i) => <Scheme scheme={scheme} mode="item" key={i} a={mod.a} b={mod.b} />)}
             </SchemeListContainer>
           }
 
-          {props.isFetching && <LoadingIndicator>Loading....</LoadingIndicator>}
+          {isFetching && <LoadingIndicator>Loading....</LoadingIndicator>}
         </Route>
 
-        <Route path="/cl">
-          <Scratch />
-        </Route>
       </AppContentContainer>
     </div>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    scheme: state.colr.selectedScheme,
-    schemeList: state.colr.schemeList,
-    isFetching: state.colr.isFetching,
-    mode: state.colr.schemeViewMode
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

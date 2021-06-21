@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from "react-redux"
 import styled from "styled-components";
 
@@ -38,10 +39,7 @@ box-sizing:border-box;
 	}
 `;
 
-const SavedColorItem = styled.div`
-`;
-
-const SavedColors = props => {
+const SavedColors = () => {
 	const colors = useSelector((state) => state.stuff.savedColors);
 
 	const divs = colors.map((c, i) => <div key={i} style={{ backgroundColor: c.hex }} />);

@@ -37,7 +37,7 @@ import Tag from "./Tag";
 export default class Scheme {
 	constructor(jsonData) {
 		// colr has a 'timestamp' prop, colourlovers does not
-		const colr = jsonData.hasOwnProperty('timestamp');
+		const colr = Object.hasOwnProperty.call(jsonData, 'timestamp');
 
 		/** @type {number} identifies the scheme in the colr.org api */
 		this.id = jsonData.id;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getColorInfo } from '../api/colr';
 import { saveColor } from '../reducto/stuff';
 
 const SchemeColorItem = props => {
@@ -25,11 +25,11 @@ const SchemeColorItem = props => {
 		//setIsMouseOver(true);
 	}
 
-	const onMouseLeave = e => {
+	const onMouseLeave = () => {
 		//setIsMouseOver(false);
 	}
 
-	const handleClick = e => {
+	const handleClick = () => {
 		dispatch(saveColor(color));
 	}
 

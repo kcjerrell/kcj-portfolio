@@ -1,5 +1,4 @@
 import axios from "axios";
-import { formatHex } from "../models/Color";
 import colorCache from "./ColorCache"
 
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
@@ -46,7 +45,7 @@ class FetchQueue {
 	async start() {
 		this._running = true;
 		while (this._queue.length > 0) {
-			const { color, resolve, reject } = this._queue.shift();;
+			const { color, resolve, reject } = this._queue.shift();
 			console.log(`Fetching ${color} (${this._queue.length} in queue)`);
 
 			try {

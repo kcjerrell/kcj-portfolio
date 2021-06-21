@@ -5,9 +5,6 @@ const STORAGE_TYPE = 'session';
 // at all. Also, it doesn't have a rate limit (that I'm aware of) so there's not much of an advantage to
 // caching api requests here anyway. YOU DON'T HAVE TO BE POLITE TO APIs.
 class ColorCache {
-	_storage;
-	_cache = {};
-
 	constructor() {
 		if (STORAGE_TYPE === 'session')
 			this._storage = window.sessionStorage;
@@ -19,12 +16,14 @@ class ColorCache {
 		if (stored)
 			this._cache = JSON.parse(stored);
 
-		else
+		else {
+			this._cache = {};
 			this._storage.setItem(STORAGE_KEY, JSON.stringify({}));
+		}
 	}
 
 	hasColor(color) {
-		return this._cache.hasOwnProperty(color);
+		return Object.hasOwnProperty.call(this._cache, color);
 	}
 
 	getColor(color) {
